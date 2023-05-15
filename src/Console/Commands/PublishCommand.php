@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Console\Commands;
+namespace BeInMedia\LaraSubscription\Console\Commands;
 
 use Illuminate\Console\Command;
 

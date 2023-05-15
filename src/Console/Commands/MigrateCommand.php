@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Console\Commands;
+namespace BeInMedia\LaraSubscription\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -13,14 +13,14 @@ class MigrateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'rinvex:migrate:subscriptions {--f|force : Force the operation to run when in production.}';
+    protected $signature = 'beinmedia:migrate:subscriptions {--f|force : Force the operation to run when in production.}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Migrate Rinvex Subscriptions Tables.';
+    protected $description = 'Migrate beinmedia LaraSubscription Tables.';
 
     /**
      * Execute the console command.
@@ -31,7 +31,7 @@ class MigrateCommand extends Command
     {
         $this->alert($this->description);
 
-        $path = config('rinvex.subscriptions.autoload_migrations') ?
+        $path = config('beinmedia.subscriptions.autoload_migrations') ?
             'vendor/rinvex/laravel-subscriptions/database/migrations' :
             'database/migrations/rinvex/laravel-subscriptions';
 

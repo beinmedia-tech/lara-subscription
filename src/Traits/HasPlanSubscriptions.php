@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Traits;
+namespace BeInMedia\LaraSubscription\Traits;
 
 use Carbon\Carbon;
-use Rinvex\Subscriptions\Models\Plan;
-use Rinvex\Subscriptions\Services\Period;
+use BeInMedia\LaraSubscription\Models\Plan;
+use BeInMedia\LaraSubscription\Services\Period;
 use Illuminate\Database\Eloquent\Collection;
-use Rinvex\Subscriptions\Models\PlanSubscription;
+use BeInMedia\LaraSubscription\Models\PlanSubscription;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasPlanSubscriptions
@@ -63,7 +63,7 @@ trait HasPlanSubscriptions
      *
      * @param string $subscriptionSlug
      *
-     * @return \Rinvex\Subscriptions\Models\PlanSubscription|null
+     * @return \BeInMedia\LaraSubscription\Models\PlanSubscription|null
      */
     public function planSubscription(string $subscriptionSlug): ?PlanSubscription
     {
@@ -100,10 +100,10 @@ trait HasPlanSubscriptions
      * Subscribe subscriber to a new plan.
      *
      * @param string                            $subscription
-     * @param \Rinvex\Subscriptions\Models\Plan $plan
+     * @param \BeInMedia\LaraSubscription\Models\Plan $plan
      * @param \Carbon\Carbon|null               $startDate
      *
-     * @return \Rinvex\Subscriptions\Models\PlanSubscription
+     * @return \BeInMedia\LaraSubscription\Models\PlanSubscription
      */
     public function newPlanSubscription($subscription, Plan $plan, Carbon $startDate = null): PlanSubscription
     {
