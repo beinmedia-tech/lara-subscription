@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePlanSubscriptionsTable extends Migration
 {
@@ -14,10 +15,11 @@ class CreatePlanSubscriptionsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('rinvex.subscriptions.tables.plan_subscriptions'), function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create(config('subscription.tables.plan_subscriptions'), function (Blueprint $table) {
+            $table->id();
             $table->morphs('subscriber');
-            $table->integer('plan_id')->unsigned();
+            $table->foreignId('plan_id')->constrained(config('subscription.tables.plans'))
+                ->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('slug');
             $table->json('name');
             $table->json('description')->nullable();
@@ -32,8 +34,6 @@ class CreatePlanSubscriptionsTable extends Migration
 
             // Indexes
             $table->unique('slug');
-            $table->foreign('plan_id')->references('id')->on(config('rinvex.subscriptions.tables.plans'))
-                  ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -44,6 +44,6 @@ class CreatePlanSubscriptionsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('rinvex.subscriptions.tables.plan_subscriptions'));
+        Schema::dropIfExists(config('subscription.tables.plan_subscriptions'));
     }
 }

@@ -25,14 +25,14 @@ class SubscriptionsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'beinmedia.subscriptions');
+        $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'subscriptions');
 
         // Bind eloquent models to IoC container
         $this->registerModels([
-            'beinmedia.subscriptions.plan' => Plan::class,
-            'beinmedia.subscriptions.plan_feature' => PlanFeature::class,
-            'beinmedia.subscriptions.plan_subscription' => PlanSubscription::class,
-            'beinmedia.subscriptions.plan_subscription_usage' => PlanSubscriptionUsage::class,
+            'subscription.plan' => Plan::class,
+            'subscription.plan_feature' => PlanFeature::class,
+            'subscription.plan_subscription' => PlanSubscription::class,
+            'subscription.plan_subscription_usage' => PlanSubscriptionUsage::class,
         ]);
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -49,9 +49,9 @@ class SubscriptionsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Publish Resources
-        $this->publishesConfig('beinmedia/lara-subscription');
-        $this->publishesMigrations('beinmedia/lara-subscription');
-        ! $this->autoloadMigrations('beinmedia/lara-subscription') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->publishes([
+            __DIR__.'/../../config/config.php' => config_path('subscription.php'),
+            __DIR__.'/../../database/migrations' => base_path('database/migrations'),
+        ]);
     }
 }

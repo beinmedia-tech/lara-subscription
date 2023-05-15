@@ -31,7 +31,7 @@ class MigrateCommand extends Command
     {
         $this->alert($this->description);
 
-        $path = config('beinmedia.subscriptions.autoload_migrations') ?
+        $path = config('subscription.autoload_migrations') ?
             'vendor/rinvex/laravel-subscriptions/database/migrations' :
             'database/migrations/rinvex/laravel-subscriptions';
 

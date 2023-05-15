@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePlansTable extends Migration
 {
@@ -14,10 +15,10 @@ class CreatePlansTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('rinvex.subscriptions.tables.plans'), function (Blueprint $table) {
+        Schema::create(config('subscription.tables.plans'), function (Blueprint $table) {
             // Columns
-            $table->increments('id');
-            $table->string('slug');
+            $table->id();
+            $table->string('slug')->unique('slug');
             $table->json('name');
             $table->json('description')->nullable();
             $table->boolean('is_active')->default(true);
@@ -38,8 +39,6 @@ class CreatePlansTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // Indexes
-            $table->unique('slug');
         });
     }
 
@@ -50,6 +49,6 @@ class CreatePlansTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('rinvex.subscriptions.tables.plans'));
+        Schema::dropIfExists(config('subscription.tables.plans'));
     }
 }
